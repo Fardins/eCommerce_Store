@@ -8,6 +8,13 @@
       "when": 1794115398777,
       "tag": "0000_tan_adam_warlock",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1794134384695,
+      "tag": "0001_condemned_stature",
+      "breakpoints": true
     }
   ]
 }
