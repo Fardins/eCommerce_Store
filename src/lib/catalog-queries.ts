@@ -40,9 +40,14 @@ function toProduct(row: ProductRow): Product {
   };
 }
 
-/** Subquery: id of the category with this slug. */
+/**
+ * Subquery: id of the category with this slug.
+ * Written with its own table alias on purpose: inside db.query.*.findMany, Drizzle rewrites every
+ * column reference in `where`/`orderBy` to the root table alias, so `${categories.id}` would render as
+ * "products"."id" and the subquery would silently match nothing.
+ */
 const categoryIdBySlug = (slug: string) =>
-  sql`(select ${categories.id} from ${categories} where ${categories.slug} = ${slug})`;
+  sql`(select "c"."id" from ${categories} "c" where "c"."slug" = ${slug})`;
 
 export async function getCategories(): Promise<LinkTile[]> {
   "use cache";
